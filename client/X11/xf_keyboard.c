@@ -616,42 +616,6 @@ BOOL xf_keyboard_handle_special_keys(xfContext* xfc, KeySym keysym)
 	if (rc == 0)
 		return TRUE;
 
-	if (!xfc->remote_app && xfc->fullscreen_toggle)
-	{
-		switch (keysym)
-		{
-			case XK_Return:
-				if (mod.Ctrl && mod.Alt)
-				{
-					/* Ctrl-Alt-Enter: toggle full screen */
-					xf_toggle_fullscreen(xfc);
-					return TRUE;
-				}
-				break;
-			default:
-				break;
-		}
-	}
-
-	if (mod.Ctrl && mod.Alt)
-	{
-		switch (keysym)
-		{
-			case XK_m:
-			case XK_M:
-				xf_minimize(xfc);
-				return TRUE;
-			case XK_c:
-			case XK_C:
-				/* Ctrl-Alt-C: toggle control */
-				if (freerdp_client_encomsp_toggle_control(xfc->common.encomsp))
-					return TRUE;
-				break;
-			default:
-				break;
-		}
-	}
-
 #if 0 /* set to 1 to enable multi touch gesture simulation via keyboard */
 #ifdef WITH_XRENDER
 
@@ -752,17 +716,6 @@ void xf_keyboard_handle_special_keys_release(xfContext* xfc, KeySym keysym)
 	// all requirements for ungrab are fulfilled, ungrabbing now
 	XF_MODIFIER_KEYS mod = { 0 };
 	xk_keyboard_get_modifier_keys(xfc, &mod);
-
-	if (!mod.RightCtrl)
-	{
-		if (!xfc->fullscreen)
-		{
-			freerdp_client_encomsp_toggle_control(xfc->common.encomsp);
-		}
-
-		xfc->mouse_active = FALSE;
-		xf_ungrab(xfc);
-	}
 
 	// ungrabbed
 	xfc->ungrabKeyboardWithRightCtrl = FALSE;
