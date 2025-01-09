@@ -161,6 +161,7 @@ static BOOL wlf_disp_sendResize(wlfDispContext* wlfDisp)
 static BOOL wlf_disp_set_window_resizable(wlfDispContext* wlfDisp)
 {
 #if 0 // TODO
+// workaround for clangd: insert line
 #endif
 	return TRUE;
 }
