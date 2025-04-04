@@ -1,3 +1,9 @@
+# recolic fork: NO shortcut
+
+disabled all shortcut.
+
+Build: `cmake .. -DCMAKE_BUILD_TYPE=Release -DWITH_CLIENT_SDL=OFF -DWITH_SERVER=OFF`
+
 # FreeRDP: A Remote Desktop Protocol Implementation
 
 FreeRDP is a free implementation of the Remote Desktop Protocol (RDP), released under the Apache license.
